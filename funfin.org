@@ -1,0 +1,9 @@
+#+TITLE: Purely Functional Personal Finance with hledger
+#+AUTHOR: Andreas Pauley
+#+DATE: 10 September 2018
+#+REVEAL_TRANS: default
+#+OPTIONS: toc:nil, reveal_title_slide:nil, num:nil
+
+* Purely Functional Personal Finance
+
+with hledger
