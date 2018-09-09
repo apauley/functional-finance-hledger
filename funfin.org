@@ -7,3 +7,29 @@
 * Purely Functional Personal Finance
 
 with hledger
+
+* What do I want?
+
+** The full picture
+
+*** All assets
+
+*** Multiple currencies
+
+** Full control
+
+*** Classify transactions in a way that makes sense to me
+
+*** Time: decide when and how much of my time to spend
+
+*** Easily improve or change how I classify transactions
+** Low maintenance
+** To extract useful info from my categorized data
+*** Average expenses over the past n months (budgeting)
+*** Net worth over time - hopefully increases every year
+*** Expose "hidden" expenses, e.g. taxes
+*** Separate tax-related accounts
+**** Interest vs Dividends vs Capital Gains vs Income
+**** RA's, Tax-free Savings Accounts etc
+** Privacy
+** Open file/data formats - future proof
