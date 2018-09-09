@@ -10,26 +10,39 @@ with hledger
 
 * What do I want?
 
-** The full picture
+The full picture
 
-*** All assets
+#+ATTR_REVEAL: :frag (appear)
+ - All major financial events
+   - buying/selling a house
+   - bonuses, shares
+ - Multiple currencies/assets
 
-*** Multiple currencies
+* What do I want?
 
-** Full control
+Full control
 
-*** Classify transactions in a way that makes sense to me
+#+ATTR_REVEAL: :frag (appear)
+ - Classify transactions in a way that makes sense to me
+ - Easily improve or change how I classify transactions
+ - Time: decide when and how much of my time to spend
 
-*** Time: decide when and how much of my time to spend
+* What do I want?
 
-*** Easily improve or change how I classify transactions
-** Low maintenance
-** To extract useful info from my categorized data
-*** Average expenses over the past n months (budgeting)
-*** Net worth over time - hopefully increases every year
-*** Expose "hidden" expenses, e.g. taxes
-*** Separate tax-related accounts
-**** Interest vs Dividends vs Capital Gains vs Income
-**** RA's, Tax-free Savings Accounts etc
-** Privacy
-** Open file/data formats - future proof
+Useful info from my data
+
+#+ATTR_REVEAL: :frag (appear)
+ - Average expenses over the past n months (budgeting)
+ - Net worth over time - hopefully increases every year
+ - Expose "hidden" expenses, e.g. taxes
+ - Expose "hidden" income, e.g. company benefits
+ - Separate tax-related accounts
+    - Interest vs Dividends vs Capital Gains vs Income
+    - RA's, Tax-free Savings Accounts etc
+
+* What do I want?
+
+#+ATTR_REVEAL: :frag (appear)
+ - Low maintenance
+ - Privacy
+ - Open file/data formats - future proof
