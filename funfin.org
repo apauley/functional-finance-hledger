@@ -109,3 +109,58 @@ with hledger
  - Driven by CSV statements - the input data
  - Classified with rules - the functions
  - Generated plain text journal files - the output
+
+* Example
+
+** An input file
+
+#+NAME: myaccount-jan2018.csv
+#+BEGIN_SRC csv
+2,account_number,'MR JOHN D DEER','FNB TJEKREKENING'
+3,,'Staat'
+3,'Staatnommer','Vanaf Datum','Tot Datum','Openingsaldo','Afsluitingsaldo','BTW Gehef'
+3,55,'28 Desember 2017','28 Januarie 2018',0.01,0.01,-0.01
+4,,'Opsomming'
+5,,'Transaksies'
+5,'Nommer','Datum','Beskrywing1','Beskrywing2','Beskrywing3','Bedrag','Saldo','Opgeloopte Koste'
+5,1,'29 Des',"Payment received","Company, Inc",,5000.01,7000.01,
+5,2,'01 Jan',"POS Transaction","Grocery Store","My town",-4000.00,3000.01,
+6,'END'
+#+END_SRC
+
+Copy it here:
+
+=import/mybank/savings/1-in/2018/myaccount-jan2018.csv=
+
+** Optional preprocessing
+
+https://github.com/apauley/fnb-csv-demoronizer
+
+#+NAME: myaccount-jan2018.csv
+#+BEGIN_SRC csv
+"5","'Nommer'","'Datum'","'Beskrywing1'","'Beskrywing2'","'Beskrywing3'","'Bedrag'","'Saldo'","'Opgeloopte Koste'","account2"
+"5","1","2017-12-29","Payment received","Company, Inc","","5000.01","7000.01","","income:spouse:taxyear2018:salary:nett"
+"5","2","2018-01-01","POS Transaction","Grocery Store","My town","-4000.01","3000.01","",
+#+END_SRC
+
+Your preprocess script should save it here:
+
+=import/mybank/savings/2-preprocessed/2018/myaccount-jan2018.csv=
+
+** A rules file
+
+#+BEGIN_SRC hledger
+skip 1
+
+fields _, code, date, desc1, desc2, desc3, amount, balance, _, account2
+
+currency R
+status *
+
+account1 assets:current:spouse:mybank:savings
+description %desc1/%desc2/%desc3
+
+if
+POS.*Grocery Store.*My town
+  account2 expenses:food:groceries
+#+END_SRC
