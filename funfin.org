@@ -57,3 +57,14 @@ with hledger
  - Your Own Spreadsheet
  - Traditional Desktop Apps e.g. GnuCash, Quicken
  - Plaintext Accounting software e.g. hledger, ledger, beancount etc
+
+* Online Apps
+
+| Pros                      | Cons                      |
+|---------------------------+---------------------------|
+| Low learning curve        | No full picture           |
+| Auto import some accounts | No multi-currency support |
+| Day-to-day view           |                           |
+| Low maintenance           | Low on Privacy            |
+| Pre-created reports       | No custom reports         |
+| Auto-classification       | Useful classification     |
