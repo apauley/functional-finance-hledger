@@ -10,6 +10,15 @@ with hledger
 
 * What do I want?
 
+ - The full picture
+ - Full control
+ - Useful info from my data
+ - Low maintenance
+ - Privacy
+ - Open file/data formats - future proof
+
+* What do I want?
+
 The full picture
 
 #+ATTR_REVEAL: :frag (appear)
