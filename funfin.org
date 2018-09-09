@@ -114,7 +114,7 @@ with hledger
 
 ** An input file
 
-#+NAME: myaccount-jan2018.csv
+#+NAME: 123456789_2018-01-30.csv
 #+BEGIN_SRC csv
 2,account_number,'MR JOHN D DEER','FNB TJEKREKENING'
 3,,'Staat'
@@ -130,13 +130,13 @@ with hledger
 
 Copy it here:
 
-=import/mybank/savings/1-in/2018/myaccount-jan2018.csv=
+=import/mybank/savings/1-in/2018/123456789_2018-01-30.csv=
 
 ** Optional preprocessing
 
 https://github.com/apauley/fnb-csv-demoronizer
 
-#+NAME: myaccount-jan2018.csv
+#+NAME: 123456789_2018-01-30-preprocessed.csv
 #+BEGIN_SRC csv
 "5","'Nommer'","'Datum'","'Beskrywing1'","'Beskrywing2'","'Beskrywing3'","'Bedrag'","'Saldo'","'Opgeloopte Koste'","account2"
 "5","1","2017-12-29","Payment received","Company, Inc","","5000.01","7000.01","","income:spouse:taxyear2018:salary:nett"
@@ -145,7 +145,15 @@ https://github.com/apauley/fnb-csv-demoronizer
 
 Your preprocess script should save it here:
 
-=import/mybank/savings/2-preprocessed/2018/myaccount-jan2018.csv=
+=import/mybank/savings/2-preprocessed/2018/123456789_2018-01-30.csv=
+
+** Opening Balances for the account
+
+#+BEGIN_SRC hledger
+2017-12-28 Savings Account Opening Balance
+    assets:current:spouse:mybank:savings               R2000.00
+    equity:opening balances:spouse:mybank:savings
+#+END_SRC
 
 ** A rules file
 
