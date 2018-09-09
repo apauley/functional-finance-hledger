@@ -78,3 +78,15 @@ with hledger
 | Learning curve  | Everything is DIY      |
 | Built-in graphs | Not an accounting tool |
 | Privacy         |                        |
+
+* GnuCash
+
+| Pros              | Cons                         |
+|-------------------+------------------------------|
+| GUI               | GUI                          |
+| Full picture      | High maintenance             |
+| Multi-currency    | GUI-approved currencies      |
+| Import statements | Manual classification        |
+| Reports           | Black box - hidden internals |
+| Privacy           | Easy to screw it up          |
+|                   | Learning curve               |
