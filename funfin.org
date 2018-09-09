@@ -123,7 +123,7 @@ https://github.com/apauley/hledger-makeitso
 
 #+ATTR_REVEAL: :frag (appear)
  - Save an input CSV file to a specific directory
- - Run: hledger-makeitso import
+ - Run: =hledger-makeitso import=
  - Add some classification rules if you want
 
 * Example
