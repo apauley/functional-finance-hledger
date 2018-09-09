@@ -68,3 +68,13 @@ with hledger
 | Low maintenance           | Low on Privacy            |
 | Pre-created reports       | No custom reports         |
 | Auto-classification       | Useful classification     |
+
+* A Spreadsheet
+
+| Pros            | Cons                   |
+|-----------------+------------------------|
+| Full picture    | High maintenance       |
+| Flexible        | Transaction import     |
+| Learning curve  | Everything is DIY      |
+| Built-in graphs | Not an accounting tool |
+| Privacy         |                        |
