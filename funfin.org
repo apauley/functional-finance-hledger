@@ -172,3 +172,27 @@ if
 POS.*Grocery Store.*My town
   account2 expenses:food:groceries
 #+END_SRC
+
+** The resulting files
+
+#+BEGIN_SRC tree
+├── import
+│   └── mybank
+│       ├── mybank.journal
+│       └── savings
+│           ├── 1-in
+│           │   └── 2018
+│           │       └── 123456789_2018-01-30.csv
+│           ├── 2-preprocessed
+│           │   └── 2018
+│           │       └── 123456789_2018-01-30.csv
+│           ├── 3-journal
+│           │   └── 2018
+│           │       └── 123456789_2018-01-30.journal
+│           ├── fnb-csv-demoronizer
+│           ├── mybank-savings.journal
+│           ├── mybank-savings.rules
+│           ├── opening.journal
+│           └── preprocess
+└── import-all.journal
+#+END_SRC
