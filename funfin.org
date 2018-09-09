@@ -110,6 +110,22 @@ with hledger
  - Classified with rules - the functions
  - Generated plain text journal files - the output
 
+* Introducing hledger-makeitso
+
+https://github.com/apauley/hledger-makeitso
+
+#+ATTR_REVEAL: :frag (appear)
+ - Inspired by [[https://github.com/adept/full-fledged-hledger][Full-fledged Hledger]]
+ - A CLI program (script?) written in Haskell using mostly Turtle
+ - Basically the parts of my automated hledger setup that isn't specific to me
+
+* The hledger-makeitso workflow
+
+#+ATTR_REVEAL: :frag (appear)
+ - Save an input CSV file to a specific directory
+ - Run: hledger-makeitso import
+ - Add some classification rules if you want
+
 * Example
 
 ** An input file
