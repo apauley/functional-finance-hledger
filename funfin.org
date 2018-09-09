@@ -90,3 +90,15 @@ with hledger
 | Reports           | Black box - hidden internals |
 | Privacy           | Easy to screw it up          |
 |                   | Learning curve               |
+
+* hledger
+
+| Pros                       | Cons             |
+|----------------------------+------------------|
+| Plain text files           | Learning curve   |
+| Full picture               | Only for geeks   |
+| Multi-currency             | Some DIY Reports |
+| Import statements          |                  |
+| Rules-based classification |                  |
+| Maintenance                |                  |
+| Privacy                    |                  |
