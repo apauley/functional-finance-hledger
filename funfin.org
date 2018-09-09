@@ -49,3 +49,11 @@ with hledger
  - Low maintenance
  - Privacy
  - Open (future proof) file/data formats
+
+* What are the options?
+
+#+ATTR_REVEAL: :frag (appear)
+ - Online systems e.g. 22seven, YNAB
+ - Your Own Spreadsheet
+ - Traditional Desktop Apps e.g. GnuCash, Quicken
+ - Plaintext Accounting software e.g. hledger, ledger, beancount etc
