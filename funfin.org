@@ -190,7 +190,7 @@ POS.*Grocery Store.*My town
   account2 expenses:food:groceries
 #+END_SRC
 
-** The resulting files
+** Run =hledger-makeitso import=
 
 #+BEGIN_SRC tree
 ├── import
@@ -212,4 +212,59 @@ POS.*Grocery Store.*My town
 │           ├── opening.journal
 │           └── preprocess
 └── import-all.journal
+#+END_SRC
+
+** The generated journals
+
+=$ hledger print assets:current not:equity=
+
+#+BEGIN_SRC hledger
+2017/12/29 * (1) Payment received/Company, Inc/
+    assets:current:spouse:mybank:savings        R5000.01 = R7000.01
+    income:spouse:taxyear2018:salary:nett       R-5000.01
+
+2018/01/01 * (2) POS Transaction/Grocery Store/My town
+    assets:current:spouse:mybank:savings       R-4000.00 = R3000.01
+    expenses:food:groceries                     R4000.00
+#+END_SRC
+
+* Some useful data
+** Monthly Balances with Average
+
+#+BEGIN_SRC
+$ hledger balance --pretty-tables --monthly --average \
+   --sort-amount --depth 2
+Balance changes in 2017/12/01-2018/01/31:
+
+                         ║       Dec        Jan    Average
+═════════════════════════╬═════════════════════════════════
+ expenses:food           ║         0   R4000.00   R2000.00
+ assets:current          ║  R7000.01  R-4000.00   R1500.00
+ equity:opening balances ║ R-2000.00          0  R-1000.00
+ income:spouse           ║ R-5000.01          0  R-2500.00
+─────────────────────────╫─────────────────────────────────
+                         ║         0          0          0
+#+END_SRC
+** Income vs Expenses
+
+#+BEGIN_SRC
+$ hledger -f example/import-all.journal incomestatement \
+   --pretty-tables --monthly --average --depth 3
+Income Statement 2017/12/28-2018/01/01
+
+                           ║      Dec        Jan   Average
+═══════════════════════════╬═══════════════════════════════
+ Revenues                  ║
+───────────────────────────╫───────────────────────────────
+ income:spouse:taxyear2018 ║ R5000.01          0  R2500.00
+───────────────────────────╫───────────────────────────────
+                           ║ R5000.01          0  R2500.00
+═══════════════════════════╬═══════════════════════════════
+ Expenses                  ║
+───────────────────────────╫───────────────────────────────
+ expenses:food:groceries   ║        0   R4000.00  R2000.00
+───────────────────────────╫───────────────────────────────
+                           ║        0   R4000.00  R2000.00
+═══════════════════════════╬═══════════════════════════════
+ Net:                      ║ R5000.01  R-4000.00   R500.00
 #+END_SRC
