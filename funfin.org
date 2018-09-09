@@ -102,3 +102,10 @@ with hledger
 | Rules-based classification |                  |
 | Maintenance                |                  |
 | Privacy                    |                  |
+
+* A Purely Functional Approach
+
+#+ATTR_REVEAL: :frag (appear)
+ - Driven by CSV statements - the input data
+ - Classified with rules - the functions
+ - Generated plain text journal files - the output
