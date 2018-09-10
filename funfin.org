@@ -9,6 +9,8 @@
 
 with hledger
 
+https://pauley.org.za/functional-finance-hledger/
+
 * What do I want?
 
  - The full picture
@@ -56,11 +58,11 @@ with hledger
 
 #+ATTR_REVEAL: :frag (appear)
  - Online systems e.g. 22seven, YNAB
- - Your Own Spreadsheet
+ - Your Own Spreadsheet™
  - Traditional Desktop Apps e.g. GnuCash, Quicken
  - Plaintext Accounting software e.g. hledger, ledger, beancount etc
 
-* Online Apps
+* Online Apps: 22seven/YNAB
 
 | Pros                      | Cons                      |
 |---------------------------+---------------------------|
@@ -71,7 +73,7 @@ with hledger
 | Pre-created reports       | No custom reports         |
 | Auto-classification       | Useful classification     |
 
-* A Spreadsheet
+* Your Own Spreadsheet™
 
 | Pros            | Cons                   |
 |-----------------+------------------------|
