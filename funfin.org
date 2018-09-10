@@ -300,6 +300,17 @@ Income Statement 2017/12/28-2018/01/01
  Net:                      ║ R5000.01  R-4000.00   R500.00
 #+END_SRC
 
+** Export to Your Own Spreadsheet™
+
+#+BEGIN_SRC csv
+$ hledger print assets:current not:equity -O csv | grep -v assets:current
+"txnidx","date","date2","status","code","description","comment","account","amount","commodity","credit","debit","posting-status","posting-comment"
+"2","2017/12/29","","*","1","Payment received/Company, Inc/","","income:unknown","-5000.01","R","5000.01","","",""
+"3","2018/01/01","","*","2","POS Transaction/Grocery Store/My town","","expenses:food:groceries","4000.00","R","","4000.00","",""
+#+END_SRC
+
+[[./images/hledger-export-to-spreadsheet.png]]
+
 * Where to Learn More
 
 http://hledger.org/
