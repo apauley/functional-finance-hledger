@@ -297,3 +297,15 @@ Income Statement 2017/12/28-2018/01/01
 ═══════════════════════════╬═══════════════════════════════
  Net:                      ║ R5000.01  R-4000.00   R500.00
 #+END_SRC
+
+* Where to Learn More
+
+http://hledger.org/
+
+https://plaintextaccounting.org/
+
+https://github.com/adept/full-fledged-hledger/wiki
+
+https://github.com/apauley/hledger-makeitso
+
+* Questions?
