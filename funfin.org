@@ -118,7 +118,7 @@ https://github.com/apauley/hledger-makeitso
 
 #+ATTR_REVEAL: :frag (appear)
  - Inspired by [[https://github.com/adept/full-fledged-hledger][Full-fledged Hledger]]
- - A CLI program (script?) written in Haskell using mostly Turtle
+ - A CLI program (script?) written in Haskell using mostly [[https://github.com/apauley/HaskellTurtleTalk][Turtle]]
  - Basically the parts of my automated hledger setup that aren't specific to me
 
 * The hledger-makeitso workflow
@@ -217,16 +217,19 @@ POS.*Grocery Store.*My town
 
 ** The generated journals
 
-=$ hledger print assets:current not:equity=
+#+BEGIN_SRC shell
+$ hledger print assets:current not:equity
+$ cat import/mybank/savings/3-journal/2018/123456789_2018-01-30.journal
+#+END_SRC
 
 #+BEGIN_SRC hledger
 2017/12/29 * (1) Payment received/Company, Inc/
-    assets:current:spouse:mybank:savings        R5000.01 = R7000.01
-    income:spouse:taxyear2018:salary:nett       R-5000.01
+    assets:current:spouse:mybank:savings  R5000.01 = R7000.01
+    income:spouse:taxyear2018:salary:nett R-5000.01
 
 2018/01/01 * (2) POS Transaction/Grocery Store/My town
-    assets:current:spouse:mybank:savings       R-4000.00 = R3000.01
-    expenses:food:groceries                     R4000.00
+    assets:current:spouse:mybank:savings  R-4000.00 = R3000.01
+    expenses:food:groceries               R4000.00
 #+END_SRC
 
 * Some useful data
