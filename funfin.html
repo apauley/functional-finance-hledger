@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Purely Functional Personal Finance</title>
+<meta name="author" content="(Andreas Pauley - @apauley)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="./reveal.js/css/reveal.css"/>
+
+<link rel="stylesheet" href="./reveal.js/css/theme/beige.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = './reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">Purely Functional Personal Finance</h1><h2 class="author">Andreas Pauley - @apauley</h2><h2 class="date">10 September 2018</h2><p class="date">Created: 2018-09-10 Mon 09:46</p>
+</section>
+
+<section>
+<section id="slide-orgacd2fc1">
+<h2 id="orgacd2fc1">Purely Functional Personal Finance</h2>
+<p>
+with hledger
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgc95d752">
+<h2 id="orgc95d752">What do I want?</h2>
+<ul>
+<li>The full picture</li>
+<li>Full control</li>
+<li>Useful info from my data</li>
+<li>Low maintenance</li>
+<li>Privacy</li>
+<li>Open (future proof) file/data formats</li>
+
+</ul>
+
+</section>
+<section id="slide-orgce3e202">
+<h3 id="orgce3e202">The full picture</h3>
+<ul>
+<li class="fragment appear">All major financial events
+<ul>
+<li>buying/selling a house</li>
+<li>bonuses, shares</li>
+
+</ul></li>
+<li class="fragment appear">Multiple currencies/assets
+<ul>
+<li>Rands, Dollars, Bitcoin, eBucks etc</li>
+
+</ul></li>
+
+</ul>
+
+</section>
+<section id="slide-orgaa3c3a1">
+<h3 id="orgaa3c3a1">Full control</h3>
+<ul>
+<li class="fragment appear">Classify transactions in a way that makes sense to me</li>
+<li class="fragment appear">Easily improve or change how I classify transactions</li>
+<li class="fragment appear">Time: decide when and how much of my time to spend</li>
+
+</ul>
+
+</section>
+<section id="slide-org4cf90ab">
+<h3 id="org4cf90ab">Useful info from my data</h3>
+<ul>
+<li class="fragment appear">Average expenses over the past n months (budgeting)</li>
+<li class="fragment appear">Net worth over time - hopefully increases every year</li>
+<li class="fragment appear">Expose "hidden" expenses, e.g. taxes</li>
+<li class="fragment appear">Expose "hidden" income, e.g. company benefits</li>
+<li class="fragment appear">Separate tax-related accounts
+<ul>
+<li>Interest vs Dividends vs Capital Gains vs Income</li>
+<li>RA's, Tax-free Savings Accounts etc</li>
+
+</ul></li>
+
+</ul>
+
+</section>
+<section id="slide-orga667872">
+<h3 id="orga667872">And don't forget&#x2026;</h3>
+<ul>
+<li class="fragment appear">Low maintenance</li>
+<li class="fragment appear">Privacy</li>
+<li class="fragment appear">Open (future proof) file/data formats</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org8b7001e">
+<h2 id="org8b7001e">What are the options?</h2>
+<ul>
+<li class="fragment appear">Online systems e.g. 22seven, YNAB</li>
+<li class="fragment appear">Your Own Spreadsheet</li>
+<li class="fragment appear">Traditional Desktop Apps e.g. GnuCash, Quicken</li>
+<li class="fragment appear">Plaintext Accounting software e.g. hledger, ledger, beancount etc</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org2a145e7">
+<h2 id="org2a145e7">Online Apps</h2>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Pros</th>
+<th scope="col" class="org-left">Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Low learning curve</td>
+<td class="org-left">No full picture</td>
+</tr>
+
+<tr>
+<td class="org-left">Auto import some accounts</td>
+<td class="org-left">No multi-currency support</td>
+</tr>
+
+<tr>
+<td class="org-left">Day-to-day view</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Low maintenance</td>
+<td class="org-left">Low on Privacy</td>
+</tr>
+
+<tr>
+<td class="org-left">Pre-created reports</td>
+<td class="org-left">No custom reports</td>
+</tr>
+
+<tr>
+<td class="org-left">Auto-classification</td>
+<td class="org-left">Useful classification</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+</section>
+<section>
+<section id="slide-orga6fa85f">
+<h2 id="orga6fa85f">A Spreadsheet</h2>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Pros</th>
+<th scope="col" class="org-left">Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Full picture</td>
+<td class="org-left">High maintenance</td>
+</tr>
+
+<tr>
+<td class="org-left">Flexible</td>
+<td class="org-left">Transaction import</td>
+</tr>
+
+<tr>
+<td class="org-left">Learning curve</td>
+<td class="org-left">Everything is DIY</td>
+</tr>
+
+<tr>
+<td class="org-left">Built-in graphs</td>
+<td class="org-left">Not an accounting tool</td>
+</tr>
+
+<tr>
+<td class="org-left">Privacy</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+</section>
+<section>
+<section id="slide-orgbee3ab6">
+<h2 id="orgbee3ab6">GnuCash</h2>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Pros</th>
+<th scope="col" class="org-left">Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">GUI</td>
+<td class="org-left">GUI</td>
+</tr>
+
+<tr>
+<td class="org-left">Full picture</td>
+<td class="org-left">High maintenance</td>
+</tr>
+
+<tr>
+<td class="org-left">Multi-currency</td>
+<td class="org-left">GUI-approved currencies</td>
+</tr>
+
+<tr>
+<td class="org-left">Import statements</td>
+<td class="org-left">Manual classification</td>
+</tr>
+
+<tr>
+<td class="org-left">Reports</td>
+<td class="org-left">Black box - hidden internals</td>
+</tr>
+
+<tr>
+<td class="org-left">Privacy</td>
+<td class="org-left">Easy to screw it up</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Learning curve</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+</section>
+<section>
+<section id="slide-orgb04e2f2">
+<h2 id="orgb04e2f2">hledger</h2>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Pros</th>
+<th scope="col" class="org-left">Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Plain text files</td>
+<td class="org-left">Learning curve</td>
+</tr>
+
+<tr>
+<td class="org-left">Full picture</td>
+<td class="org-left">Only for geeks</td>
+</tr>
+
+<tr>
+<td class="org-left">Multi-currency</td>
+<td class="org-left">Some DIY Reports</td>
+</tr>
+
+<tr>
+<td class="org-left">Import statements</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Rules-based classification</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Maintenance</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Privacy</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+</section>
+<section>
+<section id="slide-org30c4f3a">
+<h2 id="org30c4f3a">A Purely Functional Approach</h2>
+<ul>
+<li class="fragment appear">Driven by CSV statements - the input data</li>
+<li class="fragment appear">Classified with rules - the functions</li>
+<li class="fragment appear">Generated plain text journal files - the output</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org53b672c">
+<h2 id="org53b672c">Introducing hledger-makeitso</h2>
+<p>
+<a href="https://github.com/apauley/hledger-makeitso">https://github.com/apauley/hledger-makeitso</a>
+</p>
+
+<ul>
+<li class="fragment appear">Inspired by <a href="https://github.com/adept/full-fledged-hledger">Full-fledged Hledger</a></li>
+<li class="fragment appear">A CLI program (script?) written in Haskell using mostly <a href="https://github.com/apauley/HaskellTurtleTalk">Turtle</a></li>
+<li class="fragment appear">Basically the parts of my automated hledger setup that aren't specific to me</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgbfdc44b">
+<h2 id="orgbfdc44b">The hledger-makeitso workflow</h2>
+<ul>
+<li class="fragment appear">Save an input CSV file to a specific directory</li>
+<li class="fragment appear">Run: <code>hledger-makeitso import</code></li>
+<li class="fragment appear">Add some classification rules if you want</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org070cf7b">
+<h2 id="org070cf7b">Example</h2>
+<div class="outline-text-2" id="text-org070cf7b">
+</div>
+</section>
+<section id="slide-orgd41e00f">
+<h3 id="orgd41e00f">An input file</h3>
+<div class="org-src-container">
+
+<pre  class="src src-csv" id="123456789_2018-01-30.csv">2<span style="color: #00ffff;">,</span>account_number<span style="color: #00ffff;">,</span>'MR JOHN D DEER'<span style="color: #00ffff;">,</span>'FNB TJEKREKENING'
+3<span style="color: #00ffff;">,,</span>'Staat'
+3<span style="color: #00ffff;">,</span>'Staatnommer'<span style="color: #00ffff;">,</span>'Vanaf Datum'<span style="color: #00ffff;">,</span>'Tot Datum'<span style="color: #00ffff;">,</span>'Openingsaldo'<span style="color: #00ffff;">,</span>'Afsluitingsaldo'<span style="color: #00ffff;">,</span>'BTW Gehef'
+3<span style="color: #00ffff;">,</span>55<span style="color: #00ffff;">,</span>'28 Desember 2017'<span style="color: #00ffff;">,</span>'28 Januarie 2018'<span style="color: #00ffff;">,</span>0.01<span style="color: #00ffff;">,</span>0.01<span style="color: #00ffff;">,</span>-0.01
+4<span style="color: #00ffff;">,,</span>'Opsomming'
+5<span style="color: #00ffff;">,,</span>'Transaksies'
+5<span style="color: #00ffff;">,</span>'Nommer'<span style="color: #00ffff;">,</span>'Datum'<span style="color: #00ffff;">,</span>'Beskrywing1'<span style="color: #00ffff;">,</span>'Beskrywing2'<span style="color: #00ffff;">,</span>'Beskrywing3'<span style="color: #00ffff;">,</span>'Bedrag'<span style="color: #00ffff;">,</span>'Saldo'<span style="color: #00ffff;">,</span>'Opgeloopte Koste'
+5<span style="color: #00ffff;">,</span>1<span style="color: #00ffff;">,</span>'29 Des'<span style="color: #00ffff;">,</span><span style="color: #2d9574;">"Payment received"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">"Company, Inc"</span><span style="color: #00ffff;">,,</span>5000.01<span style="color: #00ffff;">,</span>7000.01<span style="color: #00ffff;">,</span>
+5<span style="color: #00ffff;">,</span>2<span style="color: #00ffff;">,</span>'01 Jan'<span style="color: #00ffff;">,</span><span style="color: #2d9574;">"POS Transaction"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">"Grocery Store"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">"My town"</span><span style="color: #00ffff;">,</span>-4000.00<span style="color: #00ffff;">,</span>3000.01<span style="color: #00ffff;">,</span>
+6<span style="color: #00ffff;">,</span>'END'
+</pre>
+</div>
+
+<p>
+Copy it here:
+</p>
+
+<p>
+<code>import/mybank/savings/1-in/2018/123456789_2018-01-30.csv</code>
+</p>
+
+</section>
+<section id="slide-orgd75f36f">
+<h3 id="orgd75f36f">Optional preprocessing</h3>
+<p>
+<a href="https://github.com/apauley/fnb-csv-demoronizer">https://github.com/apauley/fnb-csv-demoronizer</a>
+</p>
+
+<div class="org-src-container">
+
+<pre  class="src src-csv" id="123456789_2018-01-30-preprocessed.csv"><span style="color: #2d9574;">"5"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">"'Nommer'"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">"'Datum'"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">"'Beskrywing1'"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">"'Beskrywing2'"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">"'Beskrywing3'"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">"'Bedrag'"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">"'Saldo'"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">"'Opgeloopte Koste'"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">"account2"</span>
+<span style="color: #2d9574;">"5"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">"1"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">"2017-12-29"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">"Payment received"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">"Company, Inc"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">""</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">"5000.01"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">"7000.01"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">""</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">"income:spouse:taxyear2018:salary:nett"</span>
+<span style="color: #2d9574;">"5"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">"2"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">"2018-01-01"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">"POS Transaction"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">"Grocery Store"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">"My town"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">"-4000.01"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">"3000.01"</span><span style="color: #00ffff;">,</span><span style="color: #2d9574;">""</span><span style="color: #00ffff;">,</span>
+</pre>
+</div>
+
+<p>
+Your preprocess script should save it here:
+</p>
+
+<p>
+<code>import/mybank/savings/2-preprocessed/2018/123456789_2018-01-30.csv</code>
+</p>
+
+</section>
+<section id="slide-org2f755d7">
+<h3 id="org2f755d7">Opening Balances for the account</h3>
+<div class="org-src-container">
+
+<pre  class="src src-hledger"><span style="color: #2d9574;">2017-12-28</span> Savings Account Opening Balance
+    <span style="color: #7590db;">assets:current:spouse:mybank:savings</span>               R2000.00
+    <span style="color: #7590db;">equity:opening</span> balances:spouse:mybank:savings
+</pre>
+</div>
+
+</section>
+<section id="slide-orge88c07d">
+<h3 id="orge88c07d">A rules file</h3>
+<div class="org-src-container">
+
+<pre  class="src src-hledger">skip 1
+
+fields _, code, date, desc1, desc2, desc3, amount, balance, _, account2
+
+currency R
+status *
+
+account1 <span style="color: #7590db;">assets:current:spouse:mybank:savings</span>
+description %desc1/%desc2/%desc3
+
+if
+POS.*Grocery Store.*My town
+  account2 <span style="color: #7590db;">expenses:food:groceries</span>
+</pre>
+</div>
+
+</section>
+<section id="slide-org8204159">
+<h3 id="org8204159">Run <code>hledger-makeitso import</code></h3>
+<div class="org-src-container">
+
+<pre  class="src src-tree">├── import
+│   └── mybank
+│       ├── mybank.journal
+│       └── savings
+│           ├── 1-in
+│           │   └── 2018
+│           │       └── 123456789_2018-01-30.csv
+│           ├── 2-preprocessed
+│           │   └── 2018
+│           │       └── 123456789_2018-01-30.csv
+│           ├── 3-journal
+│           │   └── 2018
+│           │       └── 123456789_2018-01-30.journal
+│           ├── fnb-csv-demoronizer
+│           ├── mybank-savings.journal
+│           ├── mybank-savings.rules
+│           ├── opening.journal
+│           └── preprocess
+└── import-all.journal
+</pre>
+</div>
+
+</section>
+<section id="slide-org6aacade">
+<h3 id="org6aacade">The generated journals</h3>
+<div class="org-src-container">
+
+<pre  class="src src-hledger">$ cat import-all.journal
+### Generated by hledger-makeitso - DO NOT EDIT ###
+
+!include import/mybank/mybank.journal
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre  class="src src-hledger">$ cat import/mybank/mybank.journal
+### Generated by hledger-makeitso - DO NOT EDIT ###
+
+!include savings/mybank-savings.journal
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre  class="src src-hledger">$ cat import/mybank/savings/mybank-savings.journal
+### Generated by hledger-makeitso - DO NOT EDIT ###
+
+!include opening.journal
+!include 3-journal/2018/123456789_<span style="color: #2d9574;">2018-01-30</span>.journal
+</pre>
+</div>
+
+
+</section>
+<section id="slide-org2de3782">
+<h3 id="org2de3782">The generated journals</h3>
+<div class="org-src-container">
+
+<pre  class="src src-shell">$ hledger print assets:current not:equity
+$ cat import/mybank/savings/3-journal/2018/123456789_2018-01-30.journal
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre  class="src src-hledger"><span style="color: #2d9574;">2017/12/29</span> * (1) Payment received/Company, Inc/
+    <span style="color: #7590db;">assets:current:spouse:mybank:savings</span>  R5000.01 = R7000.01
+    <span style="color: #7590db;">income:spouse:taxyear</span>2018:salary:nett R-5000.01
+
+<span style="color: #2d9574;">2018/01/01</span> * (2) POS Transaction/Grocery Store/My town
+    <span style="color: #7590db;">assets:current:spouse:mybank:savings</span>  R-4000.00 = R3000.01
+    <span style="color: #7590db;">expenses:food:groceries</span>               R4000.00
+</pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org2fcbedc">
+<h2 id="org2fcbedc">Some useful data</h2>
+<div class="outline-text-2" id="text-org2fcbedc">
+</div>
+</section>
+<section id="slide-orge205be3">
+<h3 id="orge205be3">Monthly Balances with Average</h3>
+<pre  class="example">
+$ hledger balance --pretty-tables --monthly --average \
+   --sort-amount --depth 2
+Balance changes in 2017/12/01-2018/01/31:
+
+                         ║       Dec        Jan    Average
+═════════════════════════╬═════════════════════════════════
+ expenses:food           ║         0   R4000.00   R2000.00
+ assets:current          ║  R7000.01  R-4000.00   R1500.00
+ equity:opening balances ║ R-2000.00          0  R-1000.00
+ income:spouse           ║ R-5000.01          0  R-2500.00
+─────────────────────────╫─────────────────────────────────
+                         ║         0          0          0
+</pre>
+</section>
+<section id="slide-org502dd12">
+<h3 id="org502dd12">Income vs Expenses</h3>
+<pre  class="example">
+$ hledger -f example/import-all.journal incomestatement \
+   --pretty-tables --monthly --average --depth 3
+Income Statement 2017/12/28-2018/01/01
+
+                           ║      Dec        Jan   Average
+═══════════════════════════╬═══════════════════════════════
+ Revenues                  ║
+───────────────────────────╫───────────────────────────────
+ income:spouse:taxyear2018 ║ R5000.01          0  R2500.00
+───────────────────────────╫───────────────────────────────
+                           ║ R5000.01          0  R2500.00
+═══════════════════════════╬═══════════════════════════════
+ Expenses                  ║
+───────────────────────────╫───────────────────────────────
+ expenses:food:groceries   ║        0   R4000.00  R2000.00
+───────────────────────────╫───────────────────────────────
+                           ║        0   R4000.00  R2000.00
+═══════════════════════════╬═══════════════════════════════
+ Net:                      ║ R5000.01  R-4000.00   R500.00
+</pre>
+
+</section>
+</section>
+<section>
+<section id="slide-org2c21732">
+<h2 id="org2c21732">Where to Learn More</h2>
+<p>
+<a href="http://hledger.org/">http://hledger.org/</a>
+</p>
+
+<p>
+<a href="https://plaintextaccounting.org/">https://plaintextaccounting.org/</a>
+</p>
+
+<p>
+<a href="https://github.com/adept/full-fledged-hledger/wiki">https://github.com/adept/full-fledged-hledger/wiki</a>
+</p>
+
+<p>
+<a href="https://github.com/apauley/hledger-makeitso">https://github.com/apauley/hledger-makeitso</a>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org6b2aca1">
+<h2 id="org6b2aca1">Questions?</h2>
+</section>
+</section>
+</div>
+</div>
+<script src="./reveal.js/lib/js/head.min.js"></script>
+<script src="./reveal.js/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+overview: true,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: './reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: './reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: './reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: './reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: './reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+});
+</script>
+</body>
+</html>
