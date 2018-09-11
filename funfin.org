@@ -7,9 +7,12 @@
 
 * Purely Functional Personal Finance
 
-with hledger
+with [[http://hledger.org/][hledger]]
 
 https://pauley.org.za/functional-finance-hledger/
+
+Code for these slides:
+https://github.com/apauley/functional-finance-hledger
 
 * What do I want?
 
